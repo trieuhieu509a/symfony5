@@ -176,7 +176,7 @@ class DefaultController extends AbstractController
      */
     public function redirectTest(): Response
     {
-        return $this->redirectToRoute('generate_url', ['param'=> 10]);
+        return $this->redirectToRoute('generate_url', ['param' => 10]);
     }
 
     /**
@@ -200,7 +200,6 @@ class DefaultController extends AbstractController
     }
 
 
-
     /**
      * @Route("/home", name="default", name="home")
      */
@@ -211,5 +210,12 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
+    }
+
+    public function mostPopularPosts($number = 3): Response
+    {
+        // database call:
+        $posts = ['post 1', 'post 2', 'post 3', 'post 4'];
+        return $this->render('default/most_popular_posts.html.twig', ['posts' => $posts]);
     }
 }

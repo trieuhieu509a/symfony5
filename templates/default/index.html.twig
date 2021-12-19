@@ -79,6 +79,12 @@
     <h1>{{ app.request.get('param') }}</h1>
     <h1>{{ app.environment }}</h1>
     <h1>{{ dump(app.session) }}</h1>
+
+    {{ render(controller(
+        'App\\Controller\\DefaultController::mostPopularPosts',
+        {'number': 5}
+    )) }}
+
 {% endblock %}
 
 {#{% block javascripts %}#}

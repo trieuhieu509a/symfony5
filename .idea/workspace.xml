@@ -11,6 +11,9 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/form" />
@@ -144,6 +147,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="21YR3oTVU90blQPrpbJw2FNqemq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -191,7 +195,7 @@
       <workItem from="1638678317191" duration="18929000" />
       <workItem from="1638776526900" duration="22000" />
       <workItem from="1639492885988" duration="1443000" />
-      <workItem from="1639907873880" duration="394000" />
+      <workItem from="1639907873880" duration="2886000" />
     </task>
     <servers />
   </component>
