@@ -5,8 +5,6 @@ B
 bin/console,2/b/2b22d59fcdaf24a6d2536513e514e77fc83391a3
 ;
 var/data.db,5/6/56b6e38728f82f03de3f12998fb2ce306b0ee937
-T
-$migrations/Version20211201145304.php,d/9/d904f582fc6ef39ea11c53c4c61e9bb865ac4b5a
 C
 src/Entity/User.php,0/a/0a3e99b9da178509aeb5b3fa6f5dce46bc0eb8be
 i

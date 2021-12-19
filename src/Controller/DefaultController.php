@@ -58,15 +58,15 @@ class DefaultController extends AbstractController
 //            throw $this->createNotFoundException('The users do not exist');
 //        }
 
-        $this->addFlash(
-            'notice',
-            'your changes was updated'
-        );
-
-        $this->addFlash(
-            'warning',
-            'your changes was updated'
-        );
+//        $this->addFlash(
+//            'notice',
+//            'your changes was updated'
+//        );
+//
+//        $this->addFlash(
+//            'warning',
+//            'your changes was updated'
+//        );
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
@@ -217,5 +217,26 @@ class DefaultController extends AbstractController
         // database call:
         $posts = ['post 1', 'post 2', 'post 3', 'post 4'];
         return $this->render('default/most_popular_posts.html.twig', ['posts' => $posts]);
+    }
+
+    /**
+     * @Route("/create", name="default", name="home")
+     */
+    public function create(GiftsService $gifts): Response
+    {
+        $entinyManager = $this->getDoctrine()->getManager();
+
+        $user = new User();
+        $user->setName('Robert');
+
+        $entinyManager->persist($user);
+
+        $entinyManager->flush();
+
+        dump('A new user was saved with the id of' . $user->getId());die;
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
     }
 }

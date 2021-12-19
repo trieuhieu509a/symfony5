@@ -144,6 +144,8 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="21YR3oTVU90blQPrpbJw2FNqemq" />
@@ -195,7 +197,7 @@
       <workItem from="1638678317191" duration="18929000" />
       <workItem from="1638776526900" duration="22000" />
       <workItem from="1639492885988" duration="1443000" />
-      <workItem from="1639907873880" duration="2886000" />
+      <workItem from="1639907873880" duration="5420000" />
     </task>
     <servers />
   </component>
