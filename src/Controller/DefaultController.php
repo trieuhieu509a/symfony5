@@ -206,7 +206,7 @@ class DefaultController extends AbstractController
     public function page(GiftsService $gifts): Response
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-
+        dump($users);die;
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
@@ -220,7 +220,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="default", name="home")
+     * @Route("/create", name="default", name="create")
      */
     public function create(GiftsService $gifts): Response
     {
@@ -234,6 +234,26 @@ class DefaultController extends AbstractController
         $entinyManager->flush();
 
         dump('A new user was saved with the id of' . $user->getId());die;
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+
+    /**
+     * @Route("/user/{id}", name="user")
+     */
+    public function user(int $id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+
+//        $user = $repository->find($id);
+//        $user = $repository->findOneBy(['name' => 'Robert']);
+//        $user = $repository->findOneBy(['name' => 'Robert 0', 'id' => 1]);
+        $users = $repository->findBy(['name' => 'Robert'], ['id' => 'DESC']);
+
+        dump($users);die;
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
