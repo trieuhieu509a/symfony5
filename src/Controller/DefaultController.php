@@ -338,6 +338,20 @@ class DefaultController extends AbstractController
         // find user by id in route
         dump($user);
         die;
+    }
 
+    /**
+     * @Route("/circle-callback", name="circle-callback")
+     */
+    public function circleCallback(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+        $user->setName('Ronadinho');
+        $entityManager->persist($user);
+        $entityManager->flush();
+        // find user by id in route
+        dump($user);
+        die;
     }
 }
