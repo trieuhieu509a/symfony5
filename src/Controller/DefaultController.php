@@ -306,4 +306,27 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    /**
+     * @Route("/raw-query", name="raw-query")
+     */
+    public function rawQeury(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $conn = $entityManager->getConnection();
+        $sql = '
+            SELECT * from user u 
+            WHERE u.id > :id
+        ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['id' => 15]);
+
+        dump($stmt->fetchAll());
+        die;
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }
