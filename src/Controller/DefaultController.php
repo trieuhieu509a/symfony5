@@ -329,4 +329,15 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    /**
+     * @Route("/param-converter/{id}", name="param-converter")
+     */
+    public function paramConverter(User $user): Response
+    {
+        // find user by id in route
+        dump($user);
+        die;
+
+    }
 }
