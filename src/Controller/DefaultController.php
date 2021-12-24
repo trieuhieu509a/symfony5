@@ -287,4 +287,23 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    /**
+     * @Route("/delete-user/{id}", name="user-delete")
+     */
+    public function deleteUser(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $id = 2;
+        $user = $entityManager->getRepository(User::class)->find($id);
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        dump($user);
+        die;
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }
