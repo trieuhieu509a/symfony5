@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Video;
 use App\Services\GiftsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -352,6 +353,48 @@ class DefaultController extends AbstractController
         $entityManager->flush();
         // find user by id in route
         dump($user);
+        die;
+    }
+
+    /**
+     * @Route("/one-to-many", name="one-to-many")
+     */
+    public function oneToMany(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+//        $user = new User();
+//        $user->setName('test 2');
+//
+//        for ($i=1; $i<=3; $i++) {
+//            $video = new Video();
+//            $video->setTitle('Video title - ' . $i);
+//            $user->addVideo($video);
+//            $entityManager->persist($video);
+//        }
+//
+//        $entityManager->persist($user);
+//        $entityManager->flush();
+//        // find user by id in route
+//        dump($video->getId());
+//        dump($user->getId());
+
+
+//        $video = $this->getDoctrine()->getRepository(Video::class)->find(1);
+//        dump($video->getUser());
+//        dump($video->getUser()->getName());
+
+
+        /**
+         * @var User $user
+         */
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+
+        /**
+         * @var Video $video
+         */
+        foreach ($user->getVideos() as $video) {
+            dump($video->getTitle());
+        }
         die;
     }
 }
