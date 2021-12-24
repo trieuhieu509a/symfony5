@@ -206,7 +206,8 @@ class DefaultController extends AbstractController
     public function page(GiftsService $gifts): Response
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        dump($users);die;
+        dump($users);
+        die;
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
@@ -233,7 +234,8 @@ class DefaultController extends AbstractController
 
         $entinyManager->flush();
 
-        dump('A new user was saved with the id of' . $user->getId());die;
+        dump('A new user was saved with the id of' . $user->getId());
+        die;
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
@@ -253,7 +255,33 @@ class DefaultController extends AbstractController
 //        $user = $repository->findOneBy(['name' => 'Robert 0', 'id' => 1]);
         $users = $repository->findBy(['name' => 'Robert'], ['id' => 'DESC']);
 
-        dump($users);die;
+        dump($users);
+        die;
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/update-user/{id}", name="user-update")
+     */
+    public function updateUser(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $id = 1;
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+
+        if (!$user) {
+            throw $this->createNotFoundException('Not fount user id ' . $id);
+        }
+        $user->setName('New user name!');
+
+        $entityManager->flush();
+
+        dump($user);
+        die;
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
