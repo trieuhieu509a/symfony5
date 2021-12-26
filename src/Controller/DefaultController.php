@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\GiftsService;
@@ -407,7 +408,8 @@ class DefaultController extends AbstractController
         $user = $this->getDoctrine()->getRepository(User::class)->find(1);
         $entityManager->remove($user);
         $entityManager->flush();
-        dump($user);die;
+        dump($user);
+        die;
 
         $video = $this->getDoctrine()->getRepository(Video::class)->find(1);
         $user->removeVideo($video);
@@ -416,6 +418,30 @@ class DefaultController extends AbstractController
         foreach ($user->getVideos() as $video) {
             dump($video->getTitle());
         }
+        die;
+    }
+
+    /**
+     * @Route("/one-to-one", name="one-to-one")
+     */
+    public function oneToOneRelatedObject(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $address = new Address();
+        $address->setStreet('street');
+        $address->setNumber(23);
+
+        $user = new User();
+        $user->setName('One to One');
+        $user->setAddress($address);
+
+        // $entityManager->persist($address);  // required, if cascade:persist is not set om user entity
+        $entityManager->persist($user);
+
+        $entityManager->flush();
+
+        dump($user->getAddress()->getStreet());
         die;
     }
 }
