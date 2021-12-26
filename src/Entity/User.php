@@ -35,8 +35,14 @@ class User
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user", orphanRemoval=true)
      */
+    // remove user will automatic remove user's videos but in application level
+    // but remove video will update user_id = null ( orphanded record )
+    //@ORM\OneToMany(targetEntity=Video::class, mappedBy="user", cascade={"remove"})
+
+    // absolute remove video
+    // @ORM\OneToMany(targetEntity=Video::class, mappedBy="user", orphanRemoval=true)
     private $videos;
 
     public function __construct()

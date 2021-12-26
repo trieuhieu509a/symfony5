@@ -26,6 +26,8 @@ class Video
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="videos")
      */
     private $user;
+    // use mysql CASCADE to remove user will automatic delete videos but need re-build database (db-reset)
+    //@ORM\JoinColumn(nullable=true, onDelete="CASCADE")
 
     public function getId(): ?int
     {

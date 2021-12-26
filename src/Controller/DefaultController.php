@@ -397,4 +397,25 @@ class DefaultController extends AbstractController
         }
         die;
     }
+
+    /**
+     * @Route("/delete-related-object", name="delete-related-object")
+     */
+    public function deleteRelatedObject(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1);
+        $entityManager->remove($user);
+        $entityManager->flush();
+        dump($user);die;
+
+        $video = $this->getDoctrine()->getRepository(Video::class)->find(1);
+        $user->removeVideo($video);
+        $entityManager->flush();
+
+        foreach ($user->getVideos() as $video) {
+            dump($video->getTitle());
+        }
+        die;
+    }
 }
