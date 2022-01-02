@@ -436,12 +436,54 @@ class DefaultController extends AbstractController
         $user->setName('One to One');
         $user->setAddress($address);
 
-        // $entityManager->persist($address);  // required, if cascade:persist is not set om user entity
+        // $entityManager->persist($address);  // required, if cascade:persist is not set on user entity
         $entityManager->persist($user);
 
         $entityManager->flush();
 
         dump($user->getAddress()->getStreet());
         die;
+    }
+
+    /**
+     * @Route("/many-to-many", name="many-to-many")
+     */
+    public function manyToManyRelatedObject(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+//        // create 4 user
+//        for ($i = 1; $i <= 4; $i++) {
+//            $user = new User();
+//            $user->setName('Many to many' . $i);
+//            $entityManager->persist($user);
+//        }
+//
+//        $entityManager->flush();
+//
+//        dump($user->getId());
+//        die;
+
+        /**
+         * @var User $user1
+         * @var User $user4
+         */
+        $user1 = $entityManager->getRepository(User::class)->find(1);
+//        $user2 = $entityManager->getRepository(User::class)->find(2);
+//        $user3 = $entityManager->getRepository(User::class)->find(3);
+        $user4 = $entityManager->getRepository(User::class)->find(4);
+//
+//        $user1->addFollowed($user2);
+//        $user1->addFollowed($user3);
+//        $user1->addFollowed($user4);
+//
+//        $entityManager->flush();
+
+        dump($user1->getFollowed()->count());
+        dump($user1->getFollowing()->count());
+        dump($user4->getFollowing()->count());
+        die;
+
     }
 }
