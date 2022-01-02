@@ -486,4 +486,32 @@ class DefaultController extends AbstractController
         die;
 
     }
+
+    /**
+     * @Route("/query-builder-and-eager-load", name="query-builder-and-eager-load")
+     */
+    public function queryBuilderAndEagerLoad(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+//        $user = new User();
+//        $user->setName('Robert');
+//        $entityManager->persist($user);
+//        for ($i = 1; $i <= 3; $i++) {
+//            $video = new Video();
+//            $video->setTitle('Video title' . $i);
+//            $user->addVideo($video);
+//            $entityManager->persist($video);
+//        }
+//        $entityManager->persist($user);
+//        $entityManager->flush();
+
+
+//        $user = $entityManager->getRepository(User::class)->find(1); // lazy load
+        $user = $entityManager->getRepository(User::class)->findWithVideos(1);
+        dump($user);
+        die;
+
+    }
 }
