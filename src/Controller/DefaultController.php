@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Author;
+use App\Entity\File;
+use App\Entity\Pdf;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\GiftsService;
@@ -514,5 +517,50 @@ class DefaultController extends AbstractController
         dump($user);
         die;
 
+    }
+
+    /**
+     * @Route("/polymorphic", name="polymorphic")
+     */
+    public function polymorphic(): Response
+    {
+        $entityMananger = $this->getDoctrine()->getManager();
+
+//        $items = $entityMananger->getRepository(Pdf::class)->findAll();
+//        $items2 = $entityMananger->getRepository(File::class)->findAll();
+        /**
+         * @var Author $items3
+         */
+        $items3 = $entityMananger->getRepository(Author::class)->find(1);
+
+//        dump($items); // show in debug tool
+//        dump($items2); // show in debug tool
+//        dump($items3->getFiles()); // show in debug tool
+//
+//        /**
+//         * @var File $file
+//         */
+//        foreach ($items3->getFiles() as $file) {
+//            if ($file instanceof Pdf) {
+//                dump($file->getDescription()); // show in debug tool
+//            }
+//        }
+
+
+
+
+        $author = $entityMananger->getRepository(Author::class)->findByIdWithPdf(1);
+        dump($author);
+        foreach($author->getFiles() as $file)
+        {
+            // if($file instanceof Pdf)
+            dump($file->getFileName());
+        }
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
     }
 }
