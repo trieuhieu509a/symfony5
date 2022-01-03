@@ -9,6 +9,7 @@ use App\Entity\Pdf;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\GiftsService;
+use App\Services\MyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -556,6 +557,19 @@ class DefaultController extends AbstractController
             // if($file instanceof Pdf)
             dump($file->getFileName());
         }
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
+
+    /**
+     * @Route("/service-paramaters", name="service-paramaters")
+     */
+    public function serviceparamaters(Request $request, MyService $service): Response
+    {
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
