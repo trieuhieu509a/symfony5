@@ -40,6 +40,4 @@ services:
     # ============================== SELF DEFINED SERVICE ===========================================
     App\Services\MyService:
         arguments:
-            $param: 'some paramaters'
-            $param2: 'some paramaters 2'
-            $adminEmail: '%admin_email%'
+            $second_service: '@App\Services\MySecondService'
