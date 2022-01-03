@@ -70,6 +70,7 @@ class DefaultController extends AbstractController
 //            'your changes was updated'
 //        );
 
+        dump(123123123123); // show in debug tool
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => $users,
