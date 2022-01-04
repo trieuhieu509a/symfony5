@@ -4,11 +4,12 @@ namespace App\Services;
 
 class MyService
 {
-    use OptionalServiceTrait;
+    public $my;
+    public $logger;
+
 
     public function __construct()
     {
-        //dump('');
     }
 
 //    /**
@@ -21,6 +22,8 @@ class MyService
 //    }
 
     public function someAction(){
-        dump($this->service->doSomeThings2());
+//        dump($this->service->doSomeThings2());
+        dump($this->my);
+        dump($this->logger);
     }
 }

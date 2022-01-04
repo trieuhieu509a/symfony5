@@ -39,7 +39,7 @@ services:
             $logger: '@monolog.logger.doctrine'
 
     # ============================== SELF DEFINED SERVICE ===========================================
-#    App\Services\MyService:
-#        autowire : false # not autowire service
-#        arguments:
-#            $second_service: '@App\Services\MySecondService'
+    App\Services\MyService:
+        properties:
+            my: '@App\Services\MySecondService'
+            logger: '@monolog.logger'
