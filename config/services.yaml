@@ -17,6 +17,7 @@ services:
         #================================= SELF DEFINED SERVICE DEFAULT CONFIGS =======================================
         bind:
             $globalParam: 'global param to be used by all service defined in this file'
+        public: false
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -38,6 +39,7 @@ services:
             $logger: '@monolog.logger.doctrine'
 
     # ============================== SELF DEFINED SERVICE ===========================================
-    App\Services\MyService:
-        arguments:
-            $second_service: '@App\Services\MySecondService'
+#    App\Services\MyService:
+#        autowire : false # not autowire service
+#        arguments:
+#            $second_service: '@App\Services\MySecondService'
