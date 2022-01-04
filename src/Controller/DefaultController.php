@@ -570,7 +570,7 @@ class DefaultController extends AbstractController
      */
     public function serviceparamaters(Request $request, MyService $service): Response
     {
-
+        $service->someAction();
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],

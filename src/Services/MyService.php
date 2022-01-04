@@ -1,11 +1,26 @@
 <?php
+
 namespace App\Services;
 
-Class MyService
+class MyService
 {
-    public function __construct(MySecondService $second_service, $globalParam)
+    use OptionalServiceTrait;
+
+    public function __construct()
     {
-        dump($second_service);
-        dump($globalParam);
+        //dump('');
+    }
+
+//    /**
+//     * @param MySecondService $second_service
+//     * @required // anotation force call method
+//     */
+//    public function setSecondService(MySecondService $second_service)
+//    {
+//        dump($second_service);
+//    }
+
+    public function someAction(){
+        dump($this->service->doSomeThings2());
     }
 }
