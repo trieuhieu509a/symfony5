@@ -39,7 +39,24 @@ services:
             $logger: '@monolog.logger.doctrine'
 
     # ============================== SELF DEFINED SERVICE ===========================================
+    # ============================== service config ===========================================
+#    App\Services\MyService:
+#        arguments:
+#            $second_service: '@App\Services\MySecondService'
+    # ============================== service config ===========================================
+#    App\Services\MyService:
+#        autowire : false # not autowire service
+#        arguments:
+#            $second_service: '@App\Services\MySecondService'
+    # ============================== property injection ===========================================
+#    App\Services\MyService:
+#        properties:
+#            my: '@App\Services\MySecondService'
+#            logger: '@monolog.logger'
+
+    # ============================== lazy services ===========================================
     App\Services\MyService:
-        properties:
-            my: '@App\Services\MySecondService'
-            logger: '@monolog.logger'
+        arguments:
+            $service: '@App\Services\MySecondService'
+    App\Services\MySecondService:
+        lazy: true

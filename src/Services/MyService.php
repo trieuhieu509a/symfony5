@@ -7,9 +7,10 @@ class MyService
     public $my;
     public $logger;
 
-
-    public function __construct()
+    public function __construct($service)
     {
+        dump($service);
+        $this->secondService = $service;
     }
 
 //    /**
@@ -23,7 +24,7 @@ class MyService
 
     public function someAction(){
 //        dump($this->service->doSomeThings2());
-        dump($this->my);
-        dump($this->logger);
+//        dump($this->my);
+//        dump($this->logger);
     }
 }

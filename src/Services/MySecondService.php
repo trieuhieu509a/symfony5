@@ -10,9 +10,14 @@ class MySecondService
         $this->doSomeThings();
     }
 
+    public function someMethod()
+    {
+        return __METHOD__;
+    }
+
     public function doSomeThings()
     {
-
+        return dump(__METHOD__);
     }
 
     public function doSomeThings2()
