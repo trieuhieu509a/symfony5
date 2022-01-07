@@ -11,6 +11,7 @@ use App\Entity\Video;
 use App\Services\GiftsService;
 use App\Services\MyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -568,10 +569,11 @@ class DefaultController extends AbstractController
     /**
      * @Route("/service-paramaters", name="service-paramaters")
      */
-    public function serviceparamaters(Request $request, MyService $service): Response
+    public function serviceparamaters(Request $request, MyService $service, ContainerInterface $container): Response
     {
 //        $service->someAction();
-        dump($service->secondService->someMethod());
+//        dump($service->secondService->someMethod());
+        dump($container->get('app.myservice'));
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],

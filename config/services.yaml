@@ -38,7 +38,7 @@ services:
         bind:
             $logger: '@monolog.logger.doctrine'
 
-    # ============================== SELF DEFINED SERVICE ===========================================
+# =================================== SELF DEFINED SERVICE ===========================================
     # ============================== service config ===========================================
 #    App\Services\MyService:
 #        arguments:
@@ -55,8 +55,15 @@ services:
 #            logger: '@monolog.logger'
 
     # ============================== lazy services ===========================================
-    App\Services\MyService:
+#    App\Services\MyService:
+#        arguments:
+#            $service: '@App\Services\MySecondService'
+#    App\Services\MySecondService:
+#        lazy: true
+    # ============================== aliases ===========================================
+    app.myservice:
+        class: App\Services\MyService
         arguments:
             $service: '@App\Services\MySecondService'
-    App\Services\MySecondService:
-        lazy: true
+        public: true # make public for get by container
+    App\Services\MyService: '@app.myservice'
