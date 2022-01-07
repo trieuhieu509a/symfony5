@@ -72,3 +72,5 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postFlush }
             - { name: kernel.cache_clearer }
+    # ============================== dealing with different of a service ===================================
+    App\Services\ServiceInterface : '@App\Services\FirstService'

@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Entity\Video;
 use App\Services\GiftsService;
 use App\Services\MyService;
+use App\Services\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -592,6 +593,18 @@ class DefaultController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
+
+    /**
+     * @Route("/service-interface", name="service-interface")
+     */
+    public function serviceInterface(Request $request, ServiceInterface $service): Response
+    {
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],
