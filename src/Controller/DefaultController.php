@@ -580,4 +580,22 @@ class DefaultController extends AbstractController
             'random_gift' => [],
         ]);
     }
+
+    /**
+     * @Route("/service-tags", name="service-tags")
+     */
+    public function servicetags(Request $request, MyService $service): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find(1);
+        $user->setName('Rob');
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
 }

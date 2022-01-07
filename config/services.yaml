@@ -67,3 +67,8 @@ services:
             $service: '@App\Services\MySecondService'
         public: true # make public for get by container
     App\Services\MyService: '@app.myservice'
+    # ============================== tags ===========================================
+    App\Services\TagsService:
+        tags:
+            - { name: doctrine.event_listener, event: postFlush }
+            - { name: kernel.cache_clearer }
