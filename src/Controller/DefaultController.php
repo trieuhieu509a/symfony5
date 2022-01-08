@@ -12,6 +12,8 @@ use App\Services\GiftsService;
 use App\Services\MyService;
 use App\Services\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -550,12 +552,9 @@ class DefaultController extends AbstractController
 //        }
 
 
-
-
         $author = $entityMananger->getRepository(Author::class)->findByIdWithPdf(1);
         dump($author);
-        foreach($author->getFiles() as $file)
-        {
+        foreach ($author->getFiles() as $file) {
             // if($file instanceof Pdf)
             dump($file->getFileName());
         }
@@ -605,6 +604,33 @@ class DefaultController extends AbstractController
      */
     public function serviceInterface(Request $request, ServiceInterface $service): Response
     {
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
+
+    /**
+     * @Route("/cache", name="cache")
+     */
+    public function cache(): Response
+    {
+        $cache = new FilesystemAdapter();
+        /**
+         * @var CacheItem $posts
+         */
+        $posts = $cache->getItem('database.get_posts');
+        if (!$posts->isHit()) {
+            $posts_from_db = ['post 1', 'post 2', 'post 3'];
+            dump('connection with database .... ');
+            $posts->set(serialize($posts_from_db));
+            $posts->expiresAfter(5);
+            $cache->save($posts);
+        }
+//        $cache->clear();
+        dump(unserialize($posts->get()));
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],
