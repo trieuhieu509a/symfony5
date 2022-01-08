@@ -1,1 +1,4 @@
 composer require symfony/proxy-manager-bridge
+
+ bin/console debug:autowiring : list services autowirable which can type hint in controller method
+ bin/console debug:container 'App\Services\ServiceInterface' : get detail of service
