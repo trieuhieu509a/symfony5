@@ -2,3 +2,12 @@ composer require symfony/proxy-manager-bridge
 
  bin/console debug:autowiring : list services autowirable which can type hint in controller method
  bin/console debug:container 'App\Services\ServiceInterface' : get detail of service
+
+ bin/console : list all command
+ bin/console list doctrine : list all command start with doctrine
+ bin/console debug:router : list all rout
+ bin/console make:controller : make new controller
+ bin/console make:entity Product : make new entity Product
+ bin/console help make:controller : see how to use command in details
+ bin/console about : see details about application
+
