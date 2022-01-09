@@ -11,3 +11,5 @@ composer require symfony/proxy-manager-bridge
  bin/console help make:controller : see how to use command in details
  bin/console about : see details about application
 
+ https://symfony.com/doc/current/configuration/multiple_kernels.html
+
