@@ -13,3 +13,18 @@ composer require symfony/proxy-manager-bridge
 
  https://symfony.com/doc/current/configuration/multiple_kernels.html
 
+################################# Deploy production #########################################
+ composer require symfony/requirements-checker : check server meets necessary requirement => /check.php
+ but for new version symfony just run : symfony check:requirements
+
+ .env.local  always use regardless of enviroment
+
+ For deploy production :
+ composer install --no-dev --optimize-autoloader
+ Then if we change some new packages we can run:
+ composer install --no-dev --classmap-authoritative
+ doctrine:database:create
+ bin/console doctrine:migrations:generate
+ bin/console cache:clear --env=prod --no-debug
+################################# End of Deploy production #########################################
+
