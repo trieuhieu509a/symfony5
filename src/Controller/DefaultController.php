@@ -703,4 +703,17 @@ class DefaultController extends AbstractController
             'random_gift' => [],
         ]);
     }
+
+    /**
+     * @Route("/profiler", name="profiler")
+     */
+    public function profiler(Request $request): Response
+    {
+        dump($request, $this);
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
 }
