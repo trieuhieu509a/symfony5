@@ -74,3 +74,8 @@ services:
             - { name: kernel.cache_clearer }
     # ============================== dealing with different of a service ===================================
     App\Services\ServiceInterface : '@App\Services\FirstService'
+
+    # ============================== create listener ===================================
+    App\Services\KernelResponseListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
