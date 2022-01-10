@@ -30,3 +30,6 @@ composer require symfony/proxy-manager-bridge
 
 bin/console debug:event-dispatcher : lít all event with priority
 bin/console debug:event-dispatcher kernel.request : detail of specific event
+
+################################# make subcriber #########################################
+bin/console make:subcriber
