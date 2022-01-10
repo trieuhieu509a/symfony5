@@ -8,6 +8,7 @@ use App\Entity\File;
 use App\Entity\Pdf;
 use App\Entity\User;
 use App\Entity\Video;
+use App\Events\VideoCreatedEvent;
 use App\Services\GiftsService;
 use App\Services\MyService;
 use App\Services\ServiceInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,9 +34,10 @@ class DefaultController extends AbstractController
 //        $gifts->gifts = ['a', 'b', 'c', 'd'];
 //    }
 
-    public function __construct($logger)
+    public function __construct(EventDispatcherInterface $dispatcher, $logger)
     {
         // use $logger service
+        $this->dispatcher = $dispatcher;
     }
 //
 //    public function index(): Response
@@ -710,6 +713,25 @@ class DefaultController extends AbstractController
     public function profiler(Request $request): Response
     {
         dump($request, $this);
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+        ]);
+    }
+
+    /**
+     * @Route("/create-dispatching-event", name="create-dispatching-event")
+     */
+    public function createEvent(Request $request): Response
+    {
+        $video = new \stdClass();
+        $video->title = 'funny video';
+        $video->category = 'funny';
+        $event = new VideoCreatedEvent($video);
+
+        $this->dispatcher->dispatch('video.created.event' ,$event);
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],

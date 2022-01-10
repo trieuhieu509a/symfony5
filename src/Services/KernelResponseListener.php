@@ -9,7 +9,7 @@ class KernelResponseListener
 {
     public function onKernelResponse(ResponseEvent $event)
     {
-        $response = new Response('dupa');
-        $event->setResponse($response);
+//        $response = new Response('dupa');
+//        $event->setResponse($response);
     }
 }
