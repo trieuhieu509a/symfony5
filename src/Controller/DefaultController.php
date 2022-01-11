@@ -9,6 +9,7 @@ use App\Entity\Pdf;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Events\VideoCreatedEvent;
+use App\Form\VideoFormType;
 use App\Services\GiftsService;
 use App\Services\MyService;
 use App\Services\ServiceInterface;
@@ -222,9 +223,10 @@ class DefaultController extends AbstractController
     {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         dump($users);
-        die;
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
         ]);
     }
 
@@ -736,6 +738,33 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
             'users' => [],
             'random_gift' => [],
+        ]);
+    }
+
+    /**
+     * @Route("/form", name="form")
+     */
+    public function form(Request $request): Response
+    {
+        $video = new Video();
+//        $video->setTitle('Write a blog post');
+//        $video->setCreatedAt(new \DateTime('tomorrow'));
+
+        $form = $this->createForm(
+            VideoFormType::class,
+            $video
+        );
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
+//            return $this->redirect('home');
+        }
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => [],
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -30,6 +30,10 @@
                             href="{{ '/var/www/html/course/symfony/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code>
             </li>
         </ul>
+{#        {{ form_start(form) }}#}
+{#        {{ form_widget(form) }}#}
+{#        {{ form_end(form) }}#}
+        {{ form(form) }}
 
         {% set users = [{name: "John"}, {name: "Susan"}, {name: "Robert"}] %}
         {# <ul> #}
