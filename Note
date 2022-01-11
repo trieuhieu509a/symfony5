@@ -33,3 +33,10 @@ bin/console debug:event-dispatcher kernel.request : detail of specific event
 
 ################################# make subcriber #########################################
 bin/console make:subcriber
+
+################################# create form #########################################
+bin/console make:entity Video
+bin/console make:form VideoFormType
+
+################################# update migration file #########################################
+bin/console doctrine:migrations:diff

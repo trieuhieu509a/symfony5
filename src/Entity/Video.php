@@ -29,6 +29,11 @@ class Video extends File
      * @ORM\Column(type="integer")
      */
     private $duration;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
     // use mysql CASCADE to remove user will automatic delete videos but need re-build database (db-reset)
     //@ORM\JoinColumn(nullable=true, onDelete="CASCADE")
 
@@ -76,6 +81,18 @@ class Video extends File
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
