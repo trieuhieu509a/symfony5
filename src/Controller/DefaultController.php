@@ -746,7 +746,14 @@ class DefaultController extends AbstractController
      */
     public function form(Request $request): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $videos = $entityManager->getRepository(Video::class)->findAll();
+        dump($videos);
+
         $video = new Video();
+        $video->setSize(1);
+        $video->setFilename('File name');
+        $video->setDescription('description');
 //        $video->setTitle('Write a blog post');
 //        $video->setCreatedAt(new \DateTime('tomorrow'));
 
@@ -756,8 +763,10 @@ class DefaultController extends AbstractController
         );
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-//            return $this->redirect('home');
+//            dump($form->getData());
+            $entityManager->persist($video);
+            $entityManager->flush();
+            return $this->redirect('form');
         }
 
         return $this->render('default/index.html.twig', [
