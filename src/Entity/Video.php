@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
@@ -12,6 +13,8 @@ class Video extends File
 {
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=2, max=10, minMessage="Video title must be at least {{ limit }} characters long", maxMessage="Video title can not longer than {{ limit }} characters" )
      */
     private $title;
 
@@ -32,6 +35,8 @@ class Video extends File
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
      */
     private $created_at;
     // use mysql CASCADE to remove user will automatic delete videos but need re-build database (db-reset)
