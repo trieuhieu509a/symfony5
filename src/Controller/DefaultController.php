@@ -778,12 +778,38 @@ class DefaultController extends AbstractController
             return $this->redirect('form');
         }
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/form.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => [],
             'random_gift' => [],
             'form' => $form->createView(),
             'video' => $video,
+        ]);
+    }
+
+    /**
+     * @Route("/mail", name="mail")
+     */
+    public function mail(Request $request, \Swift_Mailer $mailer): Response
+    {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@gmail.com')
+            ->setTo('receipt@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'emails/registration.html.twig',
+                    array(
+                        'name' => 'Robert'
+                    )
+                ),
+                'text/html'
+            )
+        ;
+        $mailer->send($message);
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+            'users' => [],
+            'random_gift' => []
         ]);
     }
 }
