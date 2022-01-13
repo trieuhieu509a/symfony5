@@ -40,6 +40,10 @@
             {{ form_label(form.created_at) }}
             {{ form_widget(form.created_at) }}
         {% endif %}
+        {{ form_label(form.file) }}
+        {{ form_widget(form.file) }}
+        {{ form_label(form.agreeTerms) }}
+        {{ form_widget(form.agreeTerms) }}
         {{ form_label(form.save) }}
         {{ form_widget(form.save) }}
         {{ form_end(form) }}

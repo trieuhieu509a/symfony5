@@ -21,6 +21,8 @@ class Video extends File
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="videos")
      */
+    // use mysql CASCADE to remove user will automatic delete videos but need re-build database (db-reset)
+    //@ORM\JoinColumn(nullable=true, onDelete="CASCADE")
     private $user;
 
     /**
@@ -39,8 +41,16 @@ class Video extends File
      * @Assert\Type("\DateTime")
      */
     private $created_at;
-    // use mysql CASCADE to remove user will automatic delete videos but need re-build database (db-reset)
-    //@ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     *     maxSize="1024k",
+     *     mimeTypes={"video/mp4", "application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage="Please upload a valid video"
+     * )
+     */
+    private $file;
 
     public function getTitle(): ?string
     {
@@ -98,6 +108,18 @@ class Video extends File
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

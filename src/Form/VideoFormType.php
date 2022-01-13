@@ -6,6 +6,7 @@ use App\Entity\Video;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,6 +30,9 @@ class VideoFormType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Agree ?',
                 'mapped' => false, // no map with Entity property
+            ])
+            ->add('file', FileType::class, [
+                'label' => 'Video (Mp4 file)',
             ])
 //            ->add('format')
 //            ->add('duration')
