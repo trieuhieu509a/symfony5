@@ -747,20 +747,22 @@ class DefaultController extends AbstractController
     public function form(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $videos = $entityManager->getRepository(Video::class)->findAll();
-        dump($videos);
+//        $videos = $entityManager->getRepository(Video::class)->findAll();
+//        dump($videos);
 
-        $video = new Video();
-        $video->setSize(1);
-        $video->setFilename('File name');
-        $video->setDescription('description');
+
+//        $video = new Video();
+//        $video->setSize(1);
+//        $video->setFilename('File name');
+//        $video->setDescription('description');
+
+        $video = $entityManager->getRepository(Video::class)->find(12);
+        dump($video);
+
 //        $video->setTitle('Write a blog post');
 //        $video->setCreatedAt(new \DateTime('tomorrow'));
 
-        $form = $this->createForm(
-            VideoFormType::class,
-            $video
-        );
+        $form = $this->createForm(VideoFormType::class, $video);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 //            dump($form->getData());
@@ -774,6 +776,7 @@ class DefaultController extends AbstractController
             'users' => [],
             'random_gift' => [],
             'form' => $form->createView(),
+            'video' => $video,
         ]);
     }
 }

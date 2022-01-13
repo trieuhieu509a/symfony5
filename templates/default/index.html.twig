@@ -3,7 +3,7 @@
 {% block title %}
     Hello DefaultController!
 {% endblock %}
-{% set string = "some strings \n form \n database" %}
+{#{% set string = "some strings \n form \n database" %}#}
 {% block body %}
     <style>
         .example-wrapper {
@@ -31,12 +31,21 @@
             </li>
         </ul>
         {% form_theme form 'form_table_layout.html.twig' %}
-{#        {{ form_start(form) }}#}
-{#        {{ form_widget(form) }}#}
-{#        {{ form_end(form) }}#}
-        {{ form(form) }}
+{#        {{ dump(form.vars.value) }}#}
+{#        {{ dump(video) }}#}
+        {{ form_start(form) }}
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {% if form.created_at is defined%}
+            {{ form_label(form.created_at) }}
+            {{ form_widget(form.created_at) }}
+        {% endif %}
+        {{ form_label(form.save) }}
+        {{ form_widget(form.save) }}
+        {{ form_end(form) }}
+        {# {{ form(form) }} #}
 
-        {% set users = [{name: "John"}, {name: "Susan"}, {name: "Robert"}] %}
+{#        {% set users = [{name: "John"}, {name: "Susan"}, {name: "Robert"}] %}#}
         {# <ul> #}
         {# {% for user in users %} #}
         {# <li>{{ user.name }} - you won {{ random_gift[loop.index0] }} {{ loop.index0 }}</li> #}
@@ -58,40 +67,40 @@
 
 {#        {{ dump() }} #}{# get elements curently controller have  #}
 {#        {{ dump(controller_name) }}#}
-        <ul>
-            {% for user in users %}
-                <p>{{user.name}}</p>
-            {% else %}
-                No users where found
-            {% endfor %}
-        </ul>
+{#        <ul>#}
+{#            {% for user in users %}#}
+{#                <p>{{user.name}}</p>#}
+{#            {% else %}#}
+{#                No users where found#}
+{#            {% endfor %}#}
+{#        </ul>#}
 
-        {% for i in 1..10 %}
-            <div class="{{ cycle(['even', 'odd'], i) }}">
-                {{i}}
-            </div>
-        {% endfor %}
+{#        {% for i in 1..10 %}#}
+{#            <div class="{{ cycle(['even', 'odd'], i) }}">#}
+{#                {{i}}#}
+{#            </div>#}
+{#        {% endfor %}#}
 
 {#        {{ include('includes/subview.html.twig', {'users': users}) }}#}
 
-        <p>{{ path('home') }}</p>
-        <p>{{ url('home') }}</p>
-        <p>{{ asset('images/logo.jpg') }}</p>
-        <p>{{ absolute_url(asset('images/logo.jpg')) }}</p>
-        <img style="width:200px" src="{{ absolute_url(asset('images/logo.jpg')) }}" alt="symfony 4 course">
-    </div>
+{#        <p>{{ path('home') }}</p>#}
+{#        <p>{{ url('home') }}</p>#}
+{#        <p>{{ asset('images/logo.jpg') }}</p>#}
+{#        <p>{{ absolute_url(asset('images/logo.jpg')) }}</p>#}
+{#        <img style="width:200px" src="{{ absolute_url(asset('images/logo.jpg')) }}" alt="symfony 4 course">#}
+{#    </div>#}
 
-    <p>The google tracking code is {{ ga_code }}</p>
+{#    <p>The google tracking code is {{ ga_code }}</p>#}
 
-    <h1>{{ app.user }}</h1>
-    <h1>{{ app.request.get('param') }}</h1>
-    <h1>{{ app.environment }}</h1>
+{#    <h1>{{ app.user }}</h1>#}
+{#    <h1>{{ app.request.get('param') }}</h1>#}
+{#    <h1>{{ app.environment }}</h1>#}
 {#    <h1>{{ dump(app.session) }}</h1>#}
 
-    {{ render(controller(
-        'App\\Controller\\DefaultController::mostPopularPosts',
-        {'number': 5}
-    )) }}
+{#    {{ render(controller(#}
+{#        'App\\Controller\\DefaultController::mostPopularPosts',#}
+{#        {'number': 5}#}
+{#    )) }}#}
 
 {% endblock %}
 
