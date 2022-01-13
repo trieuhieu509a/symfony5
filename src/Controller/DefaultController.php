@@ -793,8 +793,8 @@ class DefaultController extends AbstractController
     public function mail(Request $request, \Swift_Mailer $mailer): Response
     {
         $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('send@gmail.com')
-            ->setTo('receipt@gmail.com')
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
             ->setBody(
                 $this->renderView(
                     'emails/registration.html.twig',
