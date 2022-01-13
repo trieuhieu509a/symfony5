@@ -40,3 +40,5 @@ bin/console make:form VideoFormType
 
 ################################# update migration file #########################################
 bin/console doctrine:migrations:diff
+################################# send spool mail #########################################
+bin/console swiftmailer:spool:send --message-limit=10 --env=prod --time-limit=10
