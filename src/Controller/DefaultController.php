@@ -751,13 +751,13 @@ class DefaultController extends AbstractController
 //        dump($videos);
 
 
-//        $video = new Video();
-//        $video->setSize(1);
-//        $video->setFilename('File name');
-//        $video->setDescription('description');
+        $video = new Video();
+        $video->setSize(1);
+        $video->setFilename('File name');
+        $video->setDescription('description');
 
-        $video = $entityManager->getRepository(Video::class)->find(12);
-        dump($video);
+//        $video = $entityManager->getRepository(Video::class)->find(12);
+//        dump($video);
 
 //        $video->setTitle('Write a blog post');
 //        $video->setCreatedAt(new \DateTime('tomorrow'));

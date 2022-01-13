@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Video;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,6 +25,10 @@ class VideoFormType extends AbstractType
                 'label' => 'Set video title',
 //                'data' => 'Example title',
                 'required' => false,
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Agree ?',
+                'mapped' => false, // no map with Entity property
             ])
 //            ->add('format')
 //            ->add('duration')
