@@ -88,7 +88,7 @@
 {#        {'number': 5}#}
 {#    )) }}#}
 
-{% endblock %}
+{#{% endblock %}#}
 
 {#{% block javascripts %}#}
 {#    {{ parent() }}#}
@@ -98,5 +98,7 @@
 {#        var route = "{{ string|escape('js') }}";#}
 {#        console.log(route);#}
 {#    </script>#}
-
-{#{% endblock %}#}
+    {% if app.user %}
+        <a href="{{ path('logout') }}" class="href">logout</a>
+    {% endif %}
+{% endblock %}
