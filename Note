@@ -50,3 +50,8 @@ bin/console make:user
 CONSOLE :
 bin/console make:form > RegisterUserType > SecurityUser
 
+################################# create security user #########################################
+composer require sensiolabs/security-checker
+
+bin/console security:check
+
