@@ -15,6 +15,7 @@ use App\Form\VideoFormType;
 use App\Services\GiftsService;
 use App\Services\MyService;
 use App\Services\ServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
@@ -29,6 +30,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DefaultController extends AbstractController
@@ -855,6 +857,66 @@ class DefaultController extends AbstractController
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
+        ));
+    }
+
+    /**
+     * @Route("/auth-annotation", name="auth-annotation")
+     */
+    public function authAnnotation(UserPasswordEncoderInterface $userPasswordEncoder)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(SecurityUser::class)->findAll();
+        dump($users);
+
+//        $user = new SecurityUser;
+//        $user->setEmail('user@user.com');
+//        $password = $userPasswordEncoder->encodePassword($user, 'pass');
+//        $user->setPassword($password);
+//        $entityManager->persist($user);
+//        $entityManager->flush();
+
+        $user = new SecurityUser;
+        $user->setEmail('admin@admin.com');
+        $password = $userPasswordEncoder->encodePassword($user, 'pass');
+        $user->setPassword($password);
+        $user->setRoles(['ROLE_ADMIN']);
+
+        $video = new Video;
+        $video->setTitle('video title');
+        $video->setFile('video path');
+        $video->setFilename('video path');
+        $video->setDescription('desc');
+        $video->setSize(1);
+        $video->setCreatedAt(new \DateTime());
+        $entityManager->persist($video);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        dump($user->getId());
+        dump($video->getId());
+
+        return $this->render('default/index.html.twig', array(
+            'controller_name' => 'DefaultController',
+        ));
+    }
+
+    // @Security("user.getId() == video.getSecurityUser().getId()")
+    /**
+     * @Route("/home/{id}/delete-video", name="home delete video")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function authAnnotationDeleteVideo(Request $request, UserPasswordEncoderInterface $userPasswordEncoder,Video $video, UserInterface $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(SecurityUser::class)->findAll();
+        dump($users);
+        dump($video);
+
+        return $this->render('default/index.html.twig', array(
+            'controller_name' => 'DefaultController',
         ));
     }
 }

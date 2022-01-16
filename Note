@@ -54,5 +54,5 @@ bin/console make:form > RegisterUserType > SecurityUser
 composer require sensiolabs/security-checker
 
 bin/console security:check
-################################# language package #########################################
+################################# language package ( for use security annotation  ) #########################################
 composer require symfony/expression-language
