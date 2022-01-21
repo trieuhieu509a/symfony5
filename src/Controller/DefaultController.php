@@ -933,4 +933,19 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ));
     }
+
+    /**
+     * @Route("/deny-access", name="deny access")
+     */
+    public function authorizationuUsingDenyAccessUnlessGranted(Request $request, UserInterface $user)
+    {
+//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+//        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED'); // check user use remember check box for auto login
+        dump($user);
+
+        return $this->render('default/index.html.twig', array(
+            'controller_name' => 'DefaultController',
+        ));
+    }
 }
