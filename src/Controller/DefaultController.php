@@ -904,7 +904,7 @@ class DefaultController extends AbstractController
 
     // @Security("user.getId() == video.getSecurityUser().getId()")
     /**
-     * @Route("/home/{id}/delete-video", name="home delete video")
+     * @Route("/home/{id}/video", name="home video")
      *
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -914,6 +914,20 @@ class DefaultController extends AbstractController
         $users = $entityManager->getRepository(SecurityUser::class)->findAll();
         dump($users);
         dump($video);
+
+        return $this->render('default/index.html.twig', array(
+            'controller_name' => 'DefaultController',
+        ));
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function authorizationuUsingConfigFile(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(SecurityUser::class)->findAll();
+        dump($users);
 
         return $this->render('default/index.html.twig', array(
             'controller_name' => 'DefaultController',
