@@ -101,4 +101,7 @@
     {% if app.user %}
         <a href="{{ path('logout') }}" class="href">logout</a>
     {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <p><a href="..." class="href">Delete Something, only admin can do this</a></p>
+    {% endif %}
 {% endblock %}
