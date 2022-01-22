@@ -56,3 +56,5 @@ composer require sensiolabs/security-checker
 bin/console security:check
 ################################# language package ( for use security annotation  ) #########################################
 composer require symfony/expression-language
+################################# Security - authorization use voters #########################################
+bin/console make:voter

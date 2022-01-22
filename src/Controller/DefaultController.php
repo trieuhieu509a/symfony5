@@ -948,4 +948,19 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ));
     }
+
+    /**
+     * @Route("/voters", name="voters")
+     */
+    public function voters(Request $request, UserInterface $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $video = $entityManager->getRepository(Video::class)->find(7);
+
+        $this->denyAccessUnlessGranted('VIDEO_DELETE', $video);
+
+        return $this->render('default/index.html.twig', array(
+            'controller_name' => 'DefaultController',
+        ));
+    }
 }
