@@ -58,3 +58,5 @@ bin/console security:check
 composer require symfony/expression-language
 ################################# Security - authorization use voters #########################################
 bin/console make:voter
+################################# unit test #########################################
+composer require --dev symfony/phpunit-bridge

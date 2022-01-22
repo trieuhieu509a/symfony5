@@ -19,6 +19,6 @@ class EmailsTest extends WebTestCase
         $this->assertInstanceOf('Swift_Message', $message);
         $this->assertSame('send@example.com', key($message->getFrom()));
         $this->assertSame('recipient@example.com', key($message->getTo()));
-        $this->assertContains('You did it! You registered!', $message->getBody());
+        $this->assertStringContainsString('You did it! You registered!', $message->getBody());
     }
 }
