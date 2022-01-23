@@ -40,30 +40,48 @@ class DefaultControllerTest extends WebTestCase
 //        );
 //        $this->assertTrue($client->getResponse()->isRedirect());
     }
+//
+//    public function testClickLink(): void
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('GET', '/home');
+//
+//        $link = $crawler->filter('a:contains("Login")')->link();
+//        $crawler = $client->click($link);
+//
+//        $this->assertStringContainsString('Remember me', $client->getResponse()->getContent());
+//    }
+//
+//    public function testSendAForm(): void
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('GET', '/home');
+//
+//        $form = $crawler->selectButton('Sign in')->form();
+//        $form['email'] = 'a@a';
+//        $form['password'] = '1';
+//
+//        $crawler = $client->submit($form);
+//        $crawler = $client->followRedirect();
+//
+//        $this->assertEquals(1, $crawler->filter('a:contains("logout")')->count());
+//    }
 
-    public function testClickLink(): void
+    /**
+     * @dataProvider provideUrls
+     */
+    public function testDataProvider($url): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/home');
-
-        $link = $crawler->filter('a:contains("Login")')->link();
-        $crawler = $client->click($link);
-
-        $this->assertStringContainsString('Remember me', $client->getResponse()->getContent());
+        $crawler = $client->request('GET', $url);
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
-    public function sendAForm(): void
+    public function provideUrls()
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/home');
-
-        $form = $crawler->selectButton('Sign in')->form();
-        $form['email'] = 'a@a';
-        $form['password'] = '1';
-
-        $crawler = $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        $this->assertEquals(1, $crawler->filter('a:contains("logout")')->count());
+        return [
+            ['/home'],
+            ['/login']
+        ];
     }
 }
