@@ -912,8 +912,8 @@ class DefaultController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $users = $entityManager->getRepository(SecurityUser::class)->findAll();
-        dump($users);
-        dump($video);
+//        dump($users);
+//        dump($video);
 
         return $this->render('default/index.html.twig', array(
             'controller_name' => 'DefaultController',
