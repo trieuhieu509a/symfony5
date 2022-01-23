@@ -65,4 +65,4 @@ composer require --dev symfony/phpunit-bridge
 composer require --dev symfony/test-pack
 bin/console make:functional-test
 > DefaultcontrollerTest
-> bin/phpunit test/DefaultControllerTest.php
+> bin/phpunit tests/DefaultControllerTest.php
