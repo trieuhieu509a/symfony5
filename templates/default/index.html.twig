@@ -104,4 +104,5 @@
     {% if is_granted('ROLE_ADMIN') %}
         <p><a href="..." class="href">Delete Something, only admin can do this</a></p>
     {% endif %}
+    <a href="{{ path('login') }}" class="href">Login</a>
 {% endblock %}
