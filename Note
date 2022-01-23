@@ -44,6 +44,7 @@ bin/console doctrine:migrations:diff
 bin/console swiftmailer:spool:send --message-limit=10 --env=prod --time-limit=10
 ################################# functional test email #########################################
 bin/console make:test
+> EmailsTest
 ################################# create security user #########################################
 bin/console make:user
 
@@ -60,3 +61,8 @@ composer require symfony/expression-language
 bin/console make:voter
 ################################# unit test #########################################
 composer require --dev symfony/phpunit-bridge
+################################# unit test #########################################
+composer require --dev symfony/test-pack
+bin/console make:functional-test
+> DefaultcontrollerTest
+> bin/phpunit test/DefaultControllerTest.php
