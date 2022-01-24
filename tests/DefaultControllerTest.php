@@ -108,23 +108,23 @@ class DefaultControllerTest extends WebTestCase
 //        ];
 //    }
 
-    public function testInIsolation()
-    {
-        $crawler = $this->client->request('GET', '/home');
-        $this->assertTrue($this->client->getResponse()->isSuccessful());
-
-        $video = $this->entityManager
-            ->getRepository(Video::class)
-            ->find(7);
-
-        $video = $this->entityManager->merge($video);
-        $this->entityManager->remove($video);
-        $this->entityManager->flush();
-
-        $this->assertNull($this->entityManager
-            ->getRepository(Video::class)
-            ->find(7));
-    }
+//    public function testInIsolation()
+//    {
+//        $crawler = $this->client->request('GET', '/home');
+//        $this->assertTrue($this->client->getResponse()->isSuccessful());
+//
+//        $video = $this->entityManager
+//            ->getRepository(Video::class)
+//            ->find(7);
+//
+//        $video = $this->entityManager->merge($video);
+//        $this->entityManager->remove($video);
+//        $this->entityManager->flush();
+//
+//        $this->assertNull($this->entityManager
+//            ->getRepository(Video::class)
+//            ->find(7));
+//    }
 
     public function testMockObjects()
     {

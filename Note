@@ -66,3 +66,7 @@ composer require --dev symfony/test-pack
 bin/console make:functional-test
 > DefaultcontrollerTest
 > bin/phpunit tests/DefaultControllerTest.php
+################################# code coverage report #########################################
+sudo apt install php-xdebug
+./bin/phpunit --coverage-text
+XDEBUG_MODE=coverage,debug ./bin/phpunit --coverage-text
