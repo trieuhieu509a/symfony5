@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Entity\Video;
+use App\Services\PromotionCalculator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
@@ -123,5 +124,24 @@ class DefaultControllerTest extends WebTestCase
         $this->assertNull($this->entityManager
             ->getRepository(Video::class)
             ->find(7));
+    }
+
+    public function testMockObjects()
+    {
+        $calculator = $this->getMockBuilder(PromotionCalculator::class)
+            ->setMethods(['getPromotionPercentage'])
+            ->getMock();
+
+        $calculator->expects($this->any())
+            ->method('getPromotionPercentage')
+            ->willReturn(20);
+
+        $result = $calculator->calculatePriceAfterPromotion(1,9);
+        // 10 - 20%*10{2} = 8
+        $this->assertEquals(8,$result);
+
+        $result = $calculator->calculatePriceAfterPromotion(10,20,50);
+        // 80 - 20%*80{16} = 64
+        $this->assertEquals(64,$result);
     }
 }
