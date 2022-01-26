@@ -122,16 +122,16 @@ class DefaultController extends AbstractController
         return new Response('Optional paramaters in url and ...' . "$_locale, $year, $slug, $category");
     }
 
-    /**
-     * @Route({
-     *      "nl": "/over-ons",
-     *      "en": "/about-us"
-     *}, name="about_us")
-     */
-    public function index4(): Response
-    {
-        return new Response('Optional paramaters in url and ...');
-    }
+//    /**
+//     * @Route({
+//     *      "nl": "/over-ons",
+//     *      "en": "/about-us"
+//     *}, name="about_us")
+//     */
+//    public function index4(): Response
+//    {
+//        return new Response('Optional paramaters in url and ...');
+//    }
 
 
     /**
@@ -977,5 +977,24 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
+    }
+
+    /**
+     * @Route({
+     *      "en": "/trans-route",
+     *      "pl": "/pl-trans-route",
+     * }, name="trans-route-te")
+     */
+    public function transRoute(AuthenticationUtils $authenticationUtils)
+    {
+        // http://127.0.0.1:8000/pl/home
+        // http://127.0.0.1:8000/home
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
     }
 }
