@@ -70,3 +70,5 @@ bin/console make:functional-test
 sudo apt install php-xdebug
 ./bin/phpunit --coverage-text
 XDEBUG_MODE=coverage,debug ./bin/phpunit --coverage-text
+################################# translation #########################################
+composer require symfony/translation
