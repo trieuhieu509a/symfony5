@@ -105,4 +105,9 @@
         <p><a href="..." class="href">Delete Something, only admin can do this</a></p>
     {% endif %}
     <a href="{{ path('login') }}" class="href">Login</a>
+
+    {% trans %} Symfony jest super {% endtrans %}
+    {% trans %} some.key {% endtrans %}
+    {{ 'some.key'|trans }}
+    {{ 'some.key'|trans| raw }}
 {% endblock %}

@@ -1,0 +1,3 @@
+'Symfony jest super': 'Symfony is great'
+some:
+  key: Symfony is <b>great</b>
