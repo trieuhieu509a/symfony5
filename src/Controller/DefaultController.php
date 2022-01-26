@@ -32,6 +32,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DefaultController extends AbstractController
 {
@@ -962,5 +963,19 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', array(
             'controller_name' => 'DefaultController',
         ));
+    }
+
+    /**
+     * @Route("/translations", name="translations")
+     */
+    public function translations(Request $request, TranslatorInterface $translator)
+    {
+        $translated = $translator->trans('some.key');
+        dump($translated);
+        dump($request->getLocale());
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
     }
 }
