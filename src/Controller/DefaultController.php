@@ -234,6 +234,7 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
             'users' => [],
             'random_gift' => [],
+            'count'=> 0
         ]);
     }
 
@@ -994,7 +995,7 @@ class DefaultController extends AbstractController
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error'         => $error
         ));
     }
 }

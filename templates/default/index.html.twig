@@ -112,4 +112,7 @@
     {% trans %} some.key {% endtrans %}
     {{ 'some.key'|trans }}
     {{ 'some.key'|trans| raw }}
+    {% if count > -1 %}
+        {{ 'symfony.learning'|transchoice(count) }}
+    {% endif %}
 {% endblock %}

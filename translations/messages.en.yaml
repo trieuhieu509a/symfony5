@@ -1,3 +1,5 @@
 'Symfony jest super': 'Symfony is great'
 some:
   key: Symfony is <b>great</b>
+symfony:
+  learning: "{0} I haven't started learning Symfony|{1} I've been learning Symfony for one week|{2} I've been learning Symfony for two weeks|{3} I've been learning Symfony for three weeks|]3,Inf] I've been learning Symfony for many weeks"
